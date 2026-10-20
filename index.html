@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111735">
+  <title>Explorers Academy — Find Your Planet</title>
+  <style>
+    :root{--navy:#111735;--ink:#202448;--muted:#69708f;--cream:#fffaf1;--purple:#9b83ff;--pink:#ff8bc4;--yellow:#ffd66b;--blue:#82d8ff;--green:#8ee5bb}
+    *{box-sizing:border-box} html{scroll-behavior:smooth}
+    body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--cream);color:var(--ink)}
+    a{color:inherit;text-decoration:none}.wrap{width:min(1100px,92%);margin:auto}
+    header{background:var(--navy);color:white;position:relative;overflow:hidden}
+    nav{height:78px;display:flex;align-items:center;justify-content:space-between;gap:20px;position:relative;z-index:2}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:850;letter-spacing:-.4px;font-size:1.05rem}
+    .brand-mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(135deg,var(--pink),var(--purple));display:grid;place-items:center;font-size:21px}
+    .navlinks{display:flex;align-items:center;gap:25px;color:#d9dcf5;font-size:.92rem}
+    .navlinks a:hover{color:white}.nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 19px;background:var(--yellow);color:var(--navy);font-weight:800;border:0;cursor:pointer;transition:transform .2s}
+    .nav-cta:hover,.button:hover{transform:translateY(-2px)}
+    .hero{min-height:570px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:35px;padding:50px 0 78px;position:relative;z-index:1}
+    .eyebrow{display:inline-flex;gap:8px;align-items:center;border:1px solid #42496c;background:#1a2145;padding:8px 13px;border-radius:999px;color:#e5e4ff;font-size:.82rem;font-weight:700}
+    h1{font-size:clamp(2.8rem,6vw,5.2rem);line-height:.99;letter-spacing:-.065em;margin:22px 0}
+    h1 span{color:var(--yellow)}.hero p{font-size:1.08rem;line-height:1.75;color:#c9cde7;max-width:510px}
+    .hero-actions{display:flex;gap:13px;align-items:center;flex-wrap:wrap;margin-top:27px}
+    .button.secondary{background:transparent;border:1px solid #515777;color:white}
+    .micro{color:#9ea5cb;font-size:.83rem;margin-top:18px}
+    .space-art{height:400px;position:relative;display:grid;place-items:center}
+    .orbit{position:absolute;border:1px solid #3c4267;border-radius:50%;transform:rotate(-22deg)}
+    .orbit.one{width:330px;height:170px}.orbit.two{width:420px;height:245px;transform:rotate(48deg)}
+    .sun{width:150px;height:150px;border-radius:50%;background:radial-gradient(circle at 30% 25%,#fff4b8,#ffc95b 52%,#f58d79);box-shadow:0 0 75px #ffc95b55;display:grid;place-items:center;font-size:66px;z-index:1}
+    .planet{position:absolute;border-radius:50%;display:grid;place-items:center;box-shadow:inset -10px -12px 20px #17193633,0 12px 30px #0003;animation:float 5s ease-in-out infinite}
+    .p1{width:78px;height:78px;background:linear-gradient(140deg,#ffb4d9,#e875b5);top:28px;left:17%}.p2{width:65px;height:65px;background:linear-gradient(140deg,#a4e8ff,#5aa8ff);right:9%;top:100px;animation-delay:-1s}.p3{width:92px;height:92px;background:linear-gradient(140deg,#c6b7ff,#8069e8);bottom:22px;right:16%;animation-delay:-2s}.p4{width:54px;height:54px;background:linear-gradient(140deg,#b9f7ce,#4bbf96);bottom:66px;left:8%;animation-delay:-3s}
+    .star{position:absolute;color:#fff4b5;font-size:20px}.s1{top:35px;right:26%}.s2{left:3%;top:45%}.s3{right:5%;bottom:20%}.s4{left:36%;bottom:5%}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    section{padding:82px 0}.section-heading{text-align:center;max-width:650px;margin:0 auto 42px}.kicker{text-transform:uppercase;letter-spacing:.16em;color:#8170d7;font-size:.76rem;font-weight:900}.section-heading h2{font-size:clamp(2rem,4vw,3.1rem);letter-spacing:-.05em;margin:12px 0}.section-heading p{color:var(--muted);line-height:1.7;margin:0}
+    .belief{background:#f0edff}.belief-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.belief-card{background:#fff;border-radius:23px;padding:25px;border:1px solid #e7e2ff}.icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:27px;margin-bottom:17px}.lav{background:#eee8ff}.peach{background:#ffe9df}.mint{background:#e0faed}.belief-card h3{margin:0 0 9px;font-size:1.12rem}.belief-card p{margin:0;color:var(--muted);line-height:1.65;font-size:.94rem}
+    .planets{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.planet-card{border-radius:23px;padding:22px 18px;text-align:center;border:1px solid #ece8f6;background:white;transition:transform .2s}.planet-card:hover{transform:translateY(-5px)}.planet-emoji{width:95px;height:95px;border-radius:50%;margin:0 auto 17px;display:grid;place-items:center;font-size:42px;box-shadow:inset -10px -12px 18px #17193612}.planet-card h3{margin:0 0 8px}.planet-card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}
+    .try{background:var(--navy);color:white;position:relative;overflow:hidden}.try .section-heading p{color:#c4c9e5}.try-box{max-width:680px;margin:auto;background:#1b2246;border:1px solid #3b426b;border-radius:26px;padding:30px}.try-box label{display:block;font-weight:750;margin-bottom:12px}.ages{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:25px}.age{padding:13px 8px;border-radius:13px;border:1px solid #4b527a;background:#151c3c;color:white;font-weight:750;cursor:pointer}.age.active,.age:hover{background:var(--yellow);color:var(--navy);border-color:var(--yellow)}.try-submit{width:100%;font-size:1rem}.result{display:none;text-align:center;padding:22px 12px 4px}.result .big{font-size:3.5rem}.result h3{font-size:1.5rem;margin:8px}.result p{color:#cbd0e8;line-height:1.6}
+    .closing{padding:70px 0;text-align:center}.closing h2{font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-.05em;margin:0 auto 14px;max-width:700px}.closing p{color:var(--muted);line-height:1.7;max-width:570px;margin:0 auto 25px}
+    footer{background:#0b1029;color:#b5bad5;padding:25px 0;font-size:.86rem}.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.foot strong{color:white}
+    @media(max-width:760px){.navlinks a:not(.nav-cta){display:none}.hero{grid-template-columns:1fr;padding:48px 0 50px;gap:5px}.space-art{height:300px;max-width:450px;width:100%;margin:auto;transform:scale(.88)}.hero h1{font-size:3.4rem}.belief-grid{grid-template-columns:1fr}.planets{grid-template-columns:repeat(2,1fr)}section{padding:62px 0}.nav-cta{padding:10px 14px}}
+    @media(max-width:420px){.planets{grid-template-columns:1fr 1fr;gap:10px}.planet-card{padding:16px 10px}.planet-emoji{width:75px;height:75px;font-size:34px}.ages{grid-template-columns:repeat(2,1fr)}.try-box{padding:20px}}
+  </style>
+</head>
+<body>
+<header id="home">
+  <div class="wrap">
+    <nav>
+      <a class="brand" href="#home"><span class="brand-mark">🚀</span><span>Explorers Academy</span></a>
+      <div class="navlinks"><a href="#about">About</a><a href="#planets">Our Planets</a><a class="nav-cta" href="#explore">Find Your Planet ↗</a></div>
+    </nav>
+    <div class="hero">
+      <div>
+        <div class="eyebrow">✨ A universe of possibilities for every child</div>
+        <h1>Every child has a <span>planet</span> of their own.</h1>
+        <p>Welcome to Explorers Academy — a place where children discover how they learn, what makes them curious, and where their imagination can take them.</p>
+        <div class="hero-actions"><a class="button" href="#explore">Find your planet <span style="margin-left:8px">→</span></a><a class="button secondary" href="#about">Explore the idea</a></div>
+        <div class="micro">Made for curious minds ages 5–12 🌟</div>
+      </div>
+      <div class="space-art" aria-label="Illustration of colorful planets in space">
+        <div class="orbit one"></div><div class="orbit two"></div>
+        <div class="sun">🚀</div>
+        <div class="planet p1">🎨</div><div class="planet p2">🔭</div><div class="planet p3">🧩</div><div class="planet p4">🌱</div>
+        <span class="star s1">✦</span><span class="star s2">✧</span><span class="star s3">✦</span><span class="star s4">✧</span>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <section class="belief" id="about">
+    <div class="wrap">
+      <div class="section-heading"><div class="kicker">Our idea</div><h2>Different minds. Different ways to shine.</h2><p>Every child is unique. Explorers Academy makes learning feel like an adventure by helping children explore their interests and strengths.</p></div>
+      <div class="belief-grid">
+        <article class="belief-card"><div class="icon lav">🪐</div><h3>Discover</h3><p>Children begin a journey to discover the kinds of activities and ideas that excite them.</p></article>
+        <article class="belief-card"><div class="icon peach">🧠</div><h3>Understand</h3><p>Inspired by the idea of multiple intelligences, we celebrate the many ways children think and learn.</p></article>
+        <article class="belief-card"><div class="icon mint">🚀</div><h3>Explore</h3><p>A playful, personalized experience encourages every child to keep asking questions and trying new things.</p></article>
+      </div>
+    </div>
+  </section>
+  <section id="planets">
+    <div class="wrap">
+      <div class="section-heading"><div class="kicker">A universe to explore</div><h2>Which world will you discover?</h2><p>Each planet represents a different way of exploring the world. Every one has something special to offer.</p></div>
+      <div class="planets">
+        <article class="planet-card"><div class="planet-emoji" style="background:#ffe1ef">🎨</div><h3>Creative Planet</h3><p>For imaginative minds who love to create, design, and express ideas.</p></article>
+        <article class="planet-card"><div class="planet-emoji" style="background:#dff4ff">🔭</div><h3>Discovery Planet</h3><p>For curious explorers who love questions, nature, and finding out how things work.</p></article>
+        <article class="planet-card"><div class="planet-emoji" style="background:#e9e2ff">🧩</div><h3>Logic Planet</h3><p>For problem-solvers who enjoy patterns, puzzles, and figuring things out.</p></article>
+        <article class="planet-card"><div class="planet-emoji" style="background:#ddf8e9">🤝</div><h3>Connection Planet</h3><p>For team players who enjoy sharing ideas, helping others, and learning together.</p></article>
+      </div>
+    </div>
+  </section>
+  <section class="try" id="explore">
+    <div class="wrap">
+      <div class="section-heading"><div class="kicker" style="color:#c2b4ff">Your journey starts here</div><h2>Ready, little explorer?</h2><p>Choose your age to preview the kind of welcome experience we imagine for Explorers Academy.</p></div>
+      <div class="try-box">
+        <label>How old are you?</label>
+        <div class="ages" role="group" aria-label="Choose age">
+          <button class="age" data-age="5–6">5–6</button><button class="age" data-age="7–8">7–8</button><button class="age" data-age="9–10">9–10</button><button class="age" data-age="11–12">11–12</button>
+        </div>
+        <button class="button try-submit" id="launch">Launch my journey 🚀</button>
+        <div class="result" id="result" aria-live="polite"><div class="big">🌟</div><h3 id="result-title">Your adventure awaits!</h3><p id="result-text"></p><button class="button" id="reset">Choose again</button></div>
+      </div>
+    </div>
+  </section>
+  <section class="closing">
+    <div class="wrap"><h2>A place where every child finds their own planet.</h2><p>Explorers Academy is an educational concept built around curiosity, individuality, and the joy of discovering how we learn.</p><a class="button" href="#home">Back to the top ↑</a></div>
+  </section>
+</main>
+<footer><div class="wrap foot"><span><strong>🚀 Explorers Academy</strong> · A place where every child finds their own planet.</span><span>Educational project concept · 2026</span></div></footer>
+<script>
+  const ageButtons = [...document.querySelectorAll('.age')];
+  const launch = document.getElementById('launch');
+  const result = document.getElementById('result');
+  const title = document.getElementById('result-title');
+  const text = document.getElementById('result-text');
+  let selectedAge = '';
+  ageButtons.forEach(button => button.addEventListener('click', () => {
+    selectedAge = button.dataset.age;
+    ageButtons.forEach(item => item.classList.toggle('active', item === button));
+    result.style.display = 'none';
+    launch.style.display = 'block';
+  }));
+  launch.addEventListener('click', () => {
+    if (!selectedAge) {
+      launch.textContent = 'Choose your age first ✨';
+      setTimeout(() => launch.textContent = 'Launch my journey 🚀', 1500);
+      return;
+    }
+    title.textContent = `Welcome, Explorer aged ${selectedAge}!`;
+    text.textContent = 'Your adventure is just beginning. Explore the planets, discover what you enjoy, and find your own way to shine!';
+    result.style.display = 'block';
+    launch.style.display = 'none';
+  });
+  document.getElementById('reset').addEventListener('click', () => {
+    result.style.display = 'none'; launch.style.display = 'block';
+    selectedAge = ''; ageButtons.forEach(item => item.classList.remove('active'));
+  });
+</script>
+</body>
+</html>
